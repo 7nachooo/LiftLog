@@ -28,12 +28,16 @@
         <activity android:name=".screens.RegisterActivity" />
         <activity android:name=".screens.DashboardActivity" />
         <activity android:name=".screens.SettingsActivity" />
-        <activity android:name=".screens.EntrenamientoDetalleActivity" />
         <activity android:name=".screens.RegistroEntrenamientoActivity" />
-        <activity android:name=".screens.NutricionTabScreenActivity" />
-        <activity android:name=".screens.SuenoTabScreenActivity" />
-        <activity android:name=".screens.EstadisticasTabScreenActivity" />
-        <activity android:name=".screens.ComunidadTabScreenActivity" />
+        <activity android:name=".screens.NutricionTabActivity" />
+        <activity android:name=".screens.SuenoTabActivity" />
+        <activity android:name=".screens.ComunidadTabActivity" />
+        <activity android:name=".screens.EstadisticasTabActivity" />
+        <activity android:name=".screens.RecetaDetalleActivity" />
+        <activity android:name=".screens.LogrosActivity" />
+        <activity android:name=".screens.RegistroSueñoActivity" />
+        <activity android:name=".screens.EditProfileActivity" />
+
     </application>
 </manifest>
 

@@ -1,4 +1,4 @@
-package com.ignacio.liftlog.screens
+package com.ignacio.liftlog.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -7,30 +7,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import com.ignacio.liftlog.models.Entrenamiento
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.foundation.Image
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.vector.ImageVector
+import com.ignacio.liftlog.models.LugarEntreno
+
 
 @Composable
-fun EntrenamientoDetalleScreen() {
+fun EntrenamientoDetalleScreen(entreno: Entrenamiento) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(16.dp)
     ) {
-        Text("Detalles del Entrenamiento", style = MaterialTheme.typography.headlineSmall)
-
-        Text("📅 Fecha: 18 abril 2025", fontSize = 16.sp)
-        Text("🏋️ Tipo: Pecho y tríceps", fontSize = 16.sp)
-        Text("⏱ Duración: 75 minutos", fontSize = 16.sp)
-        Text("🔥 Calorías quemadas: 570 kcal", fontSize = 16.sp)
-        Text("📍 Lugar: Gimnasio", fontSize = 16.sp)
+        Text(text = "Detalle del entrenamiento", style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Ejercicios realizados", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Text("- Press banca: 4 sets x 12 reps")
-        Text("- Fondos en paralelas: 3 sets x 10 reps")
-        Text("- Aperturas con mancuernas: 3 sets x 15 reps")
+        Text("Fecha: ${entreno.fecha}", fontSize = 16.sp)
+        Text("Tipo: ${entreno.tipo}", fontSize = 16.sp)
+        Text("Duración: ${entreno.duracion} min", fontSize = 16.sp)
+        Text("Calorías quemadas: ${entreno.calorias}", fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val icon: ImageVector = if (entreno.lugar == LugarEntreno.GIMNASIO) {
+                Icons.Default.FitnessCenter
+            } else {
+                Icons.Default.Home
+            }
+            Image(imageVector = icon, contentDescription = "Lugar del entrenamiento")
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Lugar: ${entreno.lugar.name.lowercase().replaceFirstChar { it.uppercase() }}")
+        }
     }
 }
-
