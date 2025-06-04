@@ -109,11 +109,7 @@ fun LoginScreen(onGoogleSignInClick: () -> Unit) {
                 onClick = onGoogleSignInClick
             )
             Spacer(modifier = Modifier.height(8.dp))
-            AuthButton(
-                text = "Continuar con Apple",
-                icon = painterResource(id = R.drawable.ic_apple_logo),
-                onClick = { /* Acción futura */ }
-            )
+            
 
             Spacer(modifier = Modifier.height(24.dp))
             DividerWithText("o con email")

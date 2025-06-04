@@ -63,16 +63,11 @@ fun RegisterScreen() {
         AuthButton(
             text = "Continuar con Google",
             icon = painterResource(id = R.drawable.ic_gmail_logo),
-            onClick = { /* funcionalidad futura */ }
+            onClick = {}
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        AuthButton(
-            text = "Continuar con Apple",
-            icon = painterResource(id = R.drawable.ic_apple_logo),
-            onClick = { /* funcionalidad futura */ }
-        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
