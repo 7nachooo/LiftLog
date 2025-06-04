@@ -9,18 +9,19 @@ import com.ignacio.liftlog.ui.screens.EditProfileScreen
 class EditProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             MaterialTheme {
                 EditProfileScreen(
                     initialName = "Nacho Arcala",
                     initialEmail = "nacho3@liftlog.com",
                     initialWeight = "72",
-                    onSave = { name, email, weight ->
+                    initialHeight = "176",
+                    onSave = { name, email, weight, height ->
 
                         finish()
                     },
                     onCancel = {
-
                         finish()
                     }
                 )

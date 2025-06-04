@@ -50,9 +50,6 @@ fun SettingsScreen(navController: NavController) {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        SettingItem("✏️ Editar perfil") {
-            navController.navigate("editar_perfil")
-        }
 
         SettingItem("🔒 Cambiar contraseña") {
             showChangePasswordDialog = true

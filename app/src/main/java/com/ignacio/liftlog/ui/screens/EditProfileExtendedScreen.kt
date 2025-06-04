@@ -10,24 +10,27 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EditProfileScreen(
+fun EditProfileExtendedScreen(
     initialName: String,
     initialEmail: String,
-    initialWeight: String,
-    initialHeight: String,
-    onSave: (String, String, String, String) -> Unit,
+    initialEdad: String,
+    initialAltura: String,
+    initialPeso: String,
+    onSave: (String, String, String, String, String) -> Unit,
     onCancel: () -> Unit
 ) {
     val context = LocalContext.current
 
     var name by remember { mutableStateOf(TextFieldValue(initialName)) }
     var email by remember { mutableStateOf(TextFieldValue(initialEmail)) }
-    var weight by remember { mutableStateOf(TextFieldValue(initialWeight)) }
-    var height by remember { mutableStateOf(TextFieldValue(initialHeight)) }
+    var edad by remember { mutableStateOf(TextFieldValue(initialEdad)) }
+    var altura by remember { mutableStateOf(TextFieldValue(initialAltura)) }
+    var peso by remember { mutableStateOf(TextFieldValue(initialPeso)) }
 
     var emailError by remember { mutableStateOf(false) }
-    var weightError by remember { mutableStateOf(false) }
-    var heightError by remember { mutableStateOf(false) }
+    var edadError by remember { mutableStateOf(false) }
+    var alturaError by remember { mutableStateOf(false) }
+    var pesoError by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -61,58 +64,82 @@ fun EditProfileScreen(
         }
 
         OutlinedTextField(
-            value = weight,
+            value = edad,
             onValueChange = {
-                weight = it
-                weightError = false
+                edad = it
+                edadError = false
             },
-            label = { Text("Peso (kg)") },
+            label = { Text("Edad") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            isError = weightError
+            isError = edadError
         )
-        if (weightError) {
-            Text("Peso no válido", color = MaterialTheme.colorScheme.error)
+        if (edadError) {
+            Text("Edad no válida", color = MaterialTheme.colorScheme.error)
         }
 
         OutlinedTextField(
-            value = height,
+            value = altura,
             onValueChange = {
-                height = it
-                heightError = false
+                altura = it
+                alturaError = false
             },
             label = { Text("Altura (cm)") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            isError = heightError
+            isError = alturaError
         )
-        if (heightError) {
+        if (alturaError) {
             Text("Altura no válida", color = MaterialTheme.colorScheme.error)
         }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+        OutlinedTextField(
+            value = peso,
+            onValueChange = {
+                peso = it
+                pesoError = false
+            },
+            label = { Text("Peso (kg)") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            isError = pesoError
+        )
+        if (pesoError) {
+            Text("Peso no válido", color = MaterialTheme.colorScheme.error)
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Button(
                 onClick = {
-                    val emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}".toRegex()
-                    val weightVal = weight.text.toFloatOrNull()
-                    val heightVal = height.text.toFloatOrNull()
                     var valid = true
-
-                    if (!emailRegex.matches(email.text.trim())) {
+                    if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
                         emailError = true
                         valid = false
                     }
-                    if (weightVal == null || weightVal <= 0) {
-                        weightError = true
+                    if (edad.text.toIntOrNull() == null) {
+                        edadError = true
                         valid = false
                     }
-                    if (heightVal == null || heightVal <= 0) {
-                        heightError = true
+                    if (altura.text.toIntOrNull() == null) {
+                        alturaError = true
+                        valid = false
+                    }
+                    if (peso.text.toIntOrNull() == null) {
+                        pesoError = true
                         valid = false
                     }
 
                     if (valid) {
-                        onSave(name.text.trim(), email.text.trim(), weight.text.trim(), height.text.trim())
+                        onSave(
+                            name.text.trim(),
+                            email.text.trim(),
+                            edad.text.trim(),
+                            altura.text.trim(),
+                            peso.text.trim()
+                        )
                         Toast.makeText(context, "Perfil guardado", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(context, "Corrige los errores", Toast.LENGTH_SHORT).show()
